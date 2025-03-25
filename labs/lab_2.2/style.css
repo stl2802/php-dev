@@ -1,0 +1,46 @@
+section{
+    display: flex;
+    justify-content: center;
+}
+
+form > div{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem
+}
+
+form > div > input, button[type="reset"]{
+    width: 2rem;
+}
+
+form{
+    position: absolute;
+}
+
+button[type="submit"]{
+    margin-left: 25%;
+    margin-top: 1rem;
+}
+
+
+
+.text__print{
+    margin-bottom: 1rem;
+}
+
+
+.plus{
+    grid-column: 4;
+    grid-row: 1;
+}
+
+.minus{
+    grid-column: 4;
+    grid-row: 2;
+}
+
+.devided{
+    grid-column: 4;
+    grid-row: 4;
+}
