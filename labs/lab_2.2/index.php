@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+    header('Content-Type: text/html; charset="utf-8"');
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +11,17 @@
 </head>
 <body>
     <main>
+<!--         <button id="otckl_val">
+            Отключить валидацию на стороне клиента.
+        </button> -->
         <section>
-            <form action="index.php" method="post" id="calculatorForm">
+            <div class="form-container">
+                <div class="circle-line circle-1"></div>
+                <div class="circle-line circle-2"></div>
+                <div class="circle-line circle-3"></div>
+
+            </div>
+            <form  id="calculatorForm">
                 <input name="expression" type="text" id="text__print" class="text__print" readonly>
                 <div>
                     <input type="button" value="1" class="calc-button">
@@ -32,13 +44,9 @@
                 <button type="submit">Вычислить</button>
             </form>
         </section>
-        <?php
-            if ($_SERVER["REQUEST_METHOD"] === "POST") {
-                $expression = $_POST["expression"];
-                echo $expression;
-            }
-        ?>
     </main>
-    <script src="main.js"></script>
+    <div id = "skript">
+        <script src="main.js" ></script>
+    </div>
 </body>
 </html>
