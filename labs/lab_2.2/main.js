@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function GoToServer() {
         const expression = textPrint.value;
-    
+
         try {
             const response = await fetch('main.php', {
                 method: 'POST',
