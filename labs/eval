@@ -1,0 +1,52 @@
+<?php
+
+function calculate(string $expression): ?float
+{
+    $expression = preg_replace('/[^0-9+\-*/().\s]|sin|cos|tan|cot/i', '', $expression);
+    if (preg_match('/[a-z]/i', $expression)) {
+        return null;
+    }
+
+    if (substr_count($expression, '(') !== substr_count($expression, ')')) {
+        return null;
+    }
+    if (empty($expression)) {
+        return 0.0;
+    }
+    $expression = preg_replace_callback(
+        '/(sin|cos|tan|cot)\s*\(\s*([+-]?\d+(\.\d+)?)\s*\)/i',
+        function ($matches) {
+            $function = strtolower($matches[1]);
+            $degrees = (float)$matches[2];
+            $radians = deg2rad($degrees);
+
+            switch ($function) {
+                case 'sin':
+                    return 'sin(' . $radians . ')';
+                case 'cos':
+                    return 'cos(' . $radians . ')';
+                case 'tan':
+                    return 'tan(' . $radians . ')';
+                case 'cot':
+                    return '1/tan(' . $radians . ')';  // ctg(x)
+                default:
+                    return $matches[0];
+            }
+        },
+        $expression
+    );
+
+    $code = "return (float)($expression);";
+    $result = eval($code);
+
+    return $result === false ? null : $result;
+}
+
+$result = calculate('4/3*cos(30)');
+
+if ($result === null) {
+    echo "Ошибка вычисления.\n";
+} else {
+    echo "Результат: " . $result . "\n";
+}
+?>
