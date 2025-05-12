@@ -2,7 +2,7 @@
 namespace controllers;
 use View\View;
 use Services\Db;
-use Models\Article; // Подключите Article с пространством имен
+use Models\Article; // Article с пространством имен
 class MainController
 {
     private $view;
@@ -15,7 +15,7 @@ class MainController
     }
     public function main():void
     {
-        $articles = $this->db->query('SELECT * FROM `articles`;', [], Article::class);
+        $articles = Article::findAll();
         $this->view->renderHtml('main/main.php', ['articles' => $articles]);
     }
 

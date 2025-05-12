@@ -1,26 +1,13 @@
 <?php
 namespace Models;
-class Article {
-    private $id;
-    private $name;
-    private $text;
-    private $authorId;
-    private $createdAt;
+use Models\ActiveRecordEntity;
+class Article extends ActiveRecordEntity
+{
+    protected $name;
+    protected $text;
+    protected $authorId;
+    protected $createdAt;
     private $authorNickname;
-    public function __set($name, $value)
-    {
-        $camelCaseName = $this->underscoreToCamelCase($name);
-        $this->$camelCaseName = $value;
-    }
-    private function underscoreToCamelCase(string $source): string
-    {
-        return lcfirst(str_replace('_', '', ucwords($source, '_')));
-    }
-    
-    public function getId(): int
-    {
-        return $this->id;
-    }
     public function getName(): string
     {
         return $this->name;
@@ -31,6 +18,10 @@ class Article {
     }
     public function getAuthor():string {
         return $this->authorNickname;
+    }
+    protected static function getTableName(): string
+    {
+        return 'articles';
     }
 }
 ?>
