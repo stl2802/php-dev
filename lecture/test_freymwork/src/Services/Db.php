@@ -5,8 +5,11 @@
     class Db
     {
         private $pdo;
-        public function __construct()
+        private static $instance;
+        private static $instancesCount;
+        private function __construct()
         {
+            self::$instancesCount++;
             $dbOptions = (require __DIR__ .'/../settings.php')['db'];
             $this->pdo = new \PDO(
                 'mysql:host=' . $dbOptions['host'] . ';dbname=' . $dbOptions['dbname'],
@@ -25,6 +28,13 @@
             }else{
                 return $sth->fetchAll(\PDO::FETCH_CLASS, $className);;
             }
+        }
+        public static function getInstance(): self
+        {
+            if (self::$instance === null) {
+                self::$instance = new self();
+            }
+            return self::$instance;
         }
     }
 ?>

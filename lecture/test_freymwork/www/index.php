@@ -9,8 +9,6 @@ spl_autoload_register(function (string $className) {
     }
 });
 
-/* var_dump($_GET['route']); */
-
 $route = $_GET['route'] ?? '';
 
 $routesFile = 'route.php';
