@@ -3,6 +3,7 @@ namespace Models;
 use Models\ActiveRecordEntity;
 use Models\User;
 use Models\Article;
+date_default_timezone_set('Europe/Moscow');
 class Comment extends ActiveRecordEntity
 {
     protected $id;
@@ -26,6 +27,19 @@ class Comment extends ActiveRecordEntity
     public function getText(): string
     {
         return $this->text;
+    }
+    public function getTime():string
+    {
+        return $this->createdAt;
+    }
+    public function getId(): int
+    {
+        return $this->id;
+    }
+    public function setTime():void
+    {
+        $currentTime = date('Y-m-d H:i:s');
+        $this->createdAt = $currentTime;
     }
     public function setText(string $newText):void {
         $this->text = $newText;

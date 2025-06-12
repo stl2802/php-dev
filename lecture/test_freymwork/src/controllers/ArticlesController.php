@@ -50,11 +50,15 @@
         {
             $author = User::getById(1);
             $article = new Article();
-            $article->setAuthor($author);
-            $article->setName('Новое имя статьи');
-            $article->setText('Новый текст статьи');
-            $article->save();
-            header("Location: http://localhost/polikek/lecture/test_freymwork/www/");
+            if (!empty($_POST)){
+                $article->setAuthor($author);
+                $article->setName($_POST['NewArticleName']);
+                $article->setText($_POST['NewArticleText']);
+                $article->save();
+                header("Location: http://localhost/polikek/lecture/test_freymwork/www/");
+                exit;
+            }
+            $this->view->renderHtml('articles/add.php', ['article' => $article]);
         }
         public function delete(int $articleId):void
         {

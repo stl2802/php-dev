@@ -96,8 +96,8 @@ form button[type="submit"]:hover {
 }
 </style>
 <form method="POST">
-    <input type="text" name="ArticleName" value="<?= htmlspecialchars($article->getName()) ?>"><br>
-    <textarea name="ArticleText"><?= htmlspecialchars($article->getText()) ?></textarea>
+    <input type="text" name="NewArticleName" required><br>
+    <textarea name="NewArticleText" required></textarea>
     <button type="submit">Сохранить</button>
 </form>
 <?php include __DIR__ . '/../footer.php'; ?>

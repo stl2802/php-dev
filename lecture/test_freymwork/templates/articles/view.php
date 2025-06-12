@@ -25,6 +25,13 @@
             display: flex;
             justify-content: space-between;
         }
+        .com__time{
+            font-size: 0.7rem;
+            position: absolute;
+            right: 45%;
+            bottom: 1%;
+            margin-bottom: 0rem;
+        }
     </style>
     <h1><?= $article->getName() ?></h1>
     <p><?= $article->getText() ?></p>
@@ -35,17 +42,16 @@
     <br>
     <br>
     <form method="POST" action="<?=$article->getId() ?>/comment/add">
-        <textarea name="text" required placeholder="Напишите ваш комментарий...">
-
-        </textarea>
+        <textarea name="text" required placeholder="Напишите ваш комментарий..."></textarea>
         <button type="reset">Ресетнуть</button>
         <button type="submit">Опубликовать</button>
     </form>
     <ul class="comments">
         <?php foreach ($comments as $comment ): ?>
-            <li>
+            <li id="comment__<?= $comment->getId() ?>">
                 <span> <?= $comment->getAuthor()->getNickname() ?> </span> 
                 <p><?= $comment->getText() ?></p>
+                <p class="com__time"><?= $comment->getTime() ?></p>
                 <div class="flex">
                     <a href="<?= $article->getId() ?>/comment/<?=$comment->getId()?>/edit">Редактировать комент</a>
                     <a href="<?= $article->getId() ?>/comment/<?=$comment->getId()?>/delete">удалить коммент</a>
@@ -53,5 +59,4 @@
             </li>
         <?php endforeach; ?>
     </ul>
-    <script src="js/script_view.js"></script>
 <?php include __DIR__ . '/../footer.php'; ?>

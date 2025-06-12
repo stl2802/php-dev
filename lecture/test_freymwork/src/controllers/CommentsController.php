@@ -22,9 +22,10 @@
             }
             if (!empty($_POST)){
                 $comment->setText($_POST['Text']);
+                $comment->setTime();
                 $comment->save();
                 preg_match('~^articles/(\d+)~',$_GET['route'],$matches);
-                header('Location: http://localhost/polikek/lecture/test_freymwork/www/articles/' . $matches[1]);
+                header('Location: http://localhost/polikek/lecture/test_freymwork/www/articles/' . $matches[1].'#comment__'.$comment->getId());
                 exit;
             }
             $this->view->renderHtml('articles/comment_edit.php', ['comment' => $comment]);
